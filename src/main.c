@@ -25,6 +25,7 @@
 
 typedef enum { false, true } bool;
 
+void display_title(const char *title);
 void display_main_screen(const char **opt, const size_t num_opts, const uint8_t timer);
 size_t get_uinput(const char *msg, const uint8_t min_res, const uint8_t max_res);
 void start_timer(const uint8_t minutes, const uint16_t sleep_len);
@@ -60,15 +61,19 @@ int main(void)
   return EXIT_SUCCESS;
 }
 
+void display_title(const char *title)
+{
+  system(CLEAR);
+  printf("============\n");
+  printf(" %s\n", title);
+  printf("============\n");
+}
+
 void display_main_screen(const char **opt, const size_t num_opts, const uint8_t timer)
 {
   int i;
 
-  system(CLEAR);
-
-  printf("==========\n");
-  printf(" C ALARM\n");
-  printf("==========\n");
+  display_title("C ALARM");
 
   printf("\n\nCurrent timer: %d %s\n", timer, timer > 1 ? "minutes" : "minute");
 
@@ -109,10 +114,7 @@ void start_timer(const uint8_t minutes, const uint16_t sleep_len)
   int i;
   uint8_t minutes_left;
 
-  system(CLEAR);
-  printf("==============\n");
-  printf(" Countdown\n");
-  printf("==============\n");
+  display_title("COUNTDOWN");
 
   for (i = 0; i < minutes; i++)
   {
